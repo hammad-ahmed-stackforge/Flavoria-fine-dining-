@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flavoria Fine Dining | Delicious Food, Unforgettable Moments</title>
+<meta name="description" content="Flavoria Fine Dining — premium gourmet cuisine, expert chefs, cozy ambiance.">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          charcoal: '#1A1714',
+          ink: '#2B241F',
+          cream: '#FDFBF6',
+          paper: '#F8F3EA',
+          gold: {
+            DEFAULT: '#C9A86A',
+            light: '#E0C896',
+            dark: '#8B7355',
+            deep: '#9C7E45',
+          },
+          muted: '#6B6358',
+        },
+        fontFamily: {
+          serif: ['Playfair Display', 'serif'],
+          sans: ['Inter', 'sans-serif'],
+        },
+        boxShadow: {
+          'gold-glow': '0 20px 60px -15px rgba(201,168,106,0.45)',
+          'soft': '0 10px 40px -10px rgba(26,23,20,0.12)',
+          'card': '0 8px 30px -8px rgba(26,23,20,0.10)',
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  * { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FDFBF6;
+    color: #1A1714;
+  }
+
+  .font-serif { font-family: 'Playfair Display', serif; }
+
+  /* Hide scrollbar but keep functionality for horizontal scroll */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Decorative divider */
+  .divider-ornament {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .divider-ornament .line {
+    height: 1px;
+    width: 40px;
+    background: linear-gradient(to right, transparent, #C9A86A);
+  }
+  .divider-ornament .line.right {
+    background: linear-gradient(to left, transparent, #C9A86A);
+  }
+
+  /* Plate-rim rotating ring around hero image */
+  @keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes rotate-slow-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+  @keyframes float-gentle {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-14px); }
+  }
+  .hero-ring-outer {
+    animation: rotate-slow 40s linear infinite;
+  }
+  .hero-ring-inner {
+    animation: rotate-slow-reverse 30s linear infinite;
+  }
+  .hero-float {
+    animation: float-gentle 6s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-ring-outer, .hero-ring-inner, .hero-float, .animate-fade-up, .category-item, .food-card {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
+  /* Fade up on scroll */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-up.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Gold underline link hover */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -6px;
+    width: 0; height: 1.5px;
+    background: #C9A86A;
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+
+  /* Buttons */
+  .btn-gold {
+    background: linear-gradient(135deg, #D4B57E, #C9A86A 45%, #A6824C);
+    color: #1A1714;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, letter-spacing 0.35s ease;
+  }
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px -10px rgba(166,130,76,0.55);
+  }
+  .btn-outline {
+    border: 1.5px solid #1A1714;
+    color: #1A1714;
+    transition: all 0.35s ease;
+  }
+  .btn-outline:hover {
+    background: #1A1714;
+    color: #FDFBF6;
+  }
+
+  /* Category circle */
+  .category-circle {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .category-item:hover .category-circle {
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 16px 32px -10px rgba(201,168,106,0.5);
+  }
+
+  /* Food card */
+  .food-card {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .food-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px -16px rgba(26,23,20,0.18);
+  }
+  .food-card .food-img {
+    transition: transform 0.6s ease;
+  }
+  .food-card:hover .food-img {
+    transform: scale(1.08);
+  }
+
+  /* Tab underline */
+  .tab-btn {
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    left: 50%; bottom: -10px;
+    width: 0; height: 2px;
+    background: #C9A86A;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+  }
+  .tab-btn.active::after { width: 28px; }
+  .tab-btn.active { color: #9C7E45; }
+
+  /* Mobile menu */
+  .mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  .mobile-menu.open {
+    max-height: 480px;
+  }
+
+  /* Parallax-ish banner */
+  .offer-banner {
+    background-image: linear-gradient(rgba(10,8,6,0.72), rgba(10,8,6,0.78)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1800&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+  }
+  @media (min-width: 768px) {
+    .offer-banner { background-attachment: fixed; }
+  }
+
+  /* Star rating color */
+  .star-filled { color: #C9A86A; }
+  .star-empty { color: #DCD3C1; }
+
+  /* Hero blob shape behind image */
+  .hero-blob {
+    background: radial-gradient(circle at 30% 30%, #F3E8D2 0%, #F8F3EA 60%, transparent 100%);
+  }
+
+  /* Carousel dots */
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #DCD3C1;
+    transition: all 0.4s ease;
+  }
+  .dot.active {
+    width: 26px;
+    border-radius: 5px;
+    background: #C9A86A;
+  }
+
+  /* Focus visibility for accessibility */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid #9C7E45;
+    outline-offset: 3px;
+  }
+
+  /* Marquee for top bar on small screens */
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+</style>
+</head>
+<body class="bg-cream antialiased">
+
+<!-- ============ TOP ANNOUNCEMENT BAR ============ -->
+<div class="bg-charcoal text-cream/80 text-[11px] sm:text-xs">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-2.5 flex items-center justify-between gap-4">
+    <div class="hidden md:flex items-center gap-6">
+      <a href="tel:+923021071813" class="flex items-center gap-2 hover:text-gold transition-colors">
+        <i class="fa-solid fa-phone text-gold/80"></i> 0302-1071813
+      </a>
+      <a href="mailto:hammmadahmed00321@gmail.com" class="flex items-center gap-2 hover:text-gold transition-colors">
+        <i class="fa-solid fa-envelope text-gold/80"></i> hammmadahmed00321@gmail.com
+      </a>
+    </div>
+
+    <div class="flex-1 md:flex-none text-center md:text-center font-medium tracking-wide whitespace-nowrap overflow-hidden">
+      <span class="text-gold/90"><i class="fa-solid fa-truck-fast mr-1.5"></i>Delivery Charges</span> Rs. 300 on All Orders
+    </div>
+
+    <div class="hidden md:flex items-center gap-4">
+      <span class="text-cream/60 mr-1">Follow Us:</span>
+      <a href="#" aria-label="Facebook" class="hover:text-gold transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram" class="hover:text-gold transition-colors"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" aria-label="Twitter" class="hover:text-gold transition-colors"><i class="fa-brands fa-twitter"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HEADER / NAVBAR ============ -->
+<header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-md border-b border-gold/15">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+    <div class="flex items-center justify-between py-4 lg:py-0 lg:h-24">
+
+      <!-- Left links (desktop) -->
+      <div class="hidden lg:flex items-center gap-9 font-medium text-[14px] tracking-wide flex-1">
+        <a href="#home" class="nav-link text-charcoal">Home</a>
+        <a href="#menu" class="nav-link text-muted hover:text-charcoal transition-colors">Menu</a>
+        <a href="#about" class="nav-link text-muted hover:text-charcoal transition-colors">About</a>
+      </div>
+
+      <!-- Logo center -->
+      <a href="#home" class="flex flex-col items-center mx-auto lg:mx-0 select-none">
+        <i class="fa-solid fa-crown text-gold text-sm mb-1"></i>
+        <span class="font-serif text-xl sm:text-2xl font-bold tracking-[0.12em] text-charcoal leading-none">FLAVORIA</span>
+        <span class="text-[9px] sm:text-[10px] tracking-[0.35em] text-gold-dark mt-1">FINE DINING</span>
+      </a>
+
+      <!-- Right links (desktop) -->
+      <div class="hidden lg:flex items-center justify-end gap-8 font-medium text-[14px] tracking-wide flex-1">
+        <a href="#reservation" class="nav-link text-muted hover:text-charcoal transition-colors">Reservation</a>
+        <div class="relative group">
+          <button class="nav-link text-muted hover:text-charcoal transition-colors flex items-center gap-1.5">
+            Pages <i class="fa-solid fa-chevron-down text-[10px] mt-0.5"></i>
+          </button>
+          <div class="absolute top-8 left-1/2 -translate-x-1/2 w-44 bg-white shadow-soft rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gold/10">
+            <a href="#" class="block px-4 py-2 text-sm text-muted hover:text-gold-deep hover:bg-paper">Our Story</a>
+            <a href="#" class="block px-4 py-2 text-sm text-muted hover:text-gold-deep hover:bg-paper">Gallery</a>
+            <a href="#" class="block px-4 py-2 text-sm text-muted hover:text-gold-deep hover:bg-paper">Contact</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-5 text-base text-charcoal/80 border-l border-charcoal/10 pl-6">
+          <button aria-label="Search" class="hover:text-gold transition-colors"><i class="fa-solid fa-magnifying-glass"></i></button>
+          <button aria-label="Account" class="hover:text-gold transition-colors"><i class="fa-regular fa-user"></i></button>
+        </div>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button id="menuToggle" aria-label="Toggle menu" aria-expanded="false" class="lg:hidden text-charcoal text-xl w-9 h-9 flex items-center justify-center">
+        <i class="fa-solid fa-bars" id="menuIcon"></i>
+      </button>
+    </div>
+
+    <!-- Mobile menu panel -->
+    <div id="mobileMenu" class="mobile-menu lg:hidden">
+      <div class="flex flex-col gap-1 pb-6 border-t border-gold/15 pt-4 text-[15px] font-medium">
+        <a href="#home" class="py-2.5 text-charcoal">Home</a>
+        <a href="#menu" class="py-2.5 text-muted">Menu</a>
+        <a href="#about" class="py-2.5 text-muted">About</a>
+        <a href="#reservation" class="py-2.5 text-muted">Reservation</a>
+        <a href="#" class="py-2.5 text-muted">Pages</a>
+        <div class="flex items-center gap-5 pt-3 mt-2 border-t border-gold/10 text-charcoal/80">
+          <button aria-label="Search" class="w-9 h-9 rounded-full bg-paper flex items-center justify-center"><i class="fa-solid fa-magnifying-glass text-sm"></i></button>
+          <button aria-label="Account" class="w-9 h-9 rounded-full bg-paper flex items-center justify-center"><i class="fa-regular fa-user text-sm"></i></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO SECTION ============ -->
+<section id="home" class="relative overflow-hidden bg-paper">
+  <!-- subtle texture dots -->
+  <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: radial-gradient(circle, #1A1714 1px, transparent 1px); background-size: 22px 22px;"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 relative">
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-4 items-center min-h-[640px] lg:min-h-[700px] py-12 lg:py-0">
+
+      <!-- Left content -->
+      <div class="relative z-10 text-center lg:text-left order-2 lg:order-1">
+        <div class="fade-up inline-flex items-center gap-2 text-gold-deep font-semibold text-[12px] tracking-[0.2em] mb-5 mx-auto lg:mx-0">
+          <span class="w-6 h-px bg-gold-deep"></span>
+          EXPERIENCE FINE DINING
+        </div>
+
+        <h1 class="fade-up font-serif text-[2.5rem] sm:text-5xl lg:text-[3.4rem] leading-[1.12] font-bold text-charcoal mb-6">
+          Delicious Food,<br>
+          Unforgettable <span class="text-gold-deep italic">Moments</span>
+        </h1>
+
+        <p class="fade-up text-muted text-[15px] sm:text-base leading-relaxed max-w-md mx-auto lg:mx-0 mb-9">
+          A perfect blend of taste, art, and ambiance. Crafted to delight your senses, plated by hands that treat every dish like a small ceremony.
+        </p>
+
+        <div class="fade-up flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start mb-10">
+          <a href="#reservation" class="btn-gold w-full sm:w-auto text-center px-8 py-4 rounded-md font-semibold text-[13px] tracking-[0.12em]">
+            BOOK A TABLE
+          </a>
+          <a href="#menu" class="btn-outline w-full sm:w-auto text-center px-8 py-4 rounded-md font-semibold text-[13px] tracking-[0.12em]">
+            EXPLORE MENU
+          </a>
+        </div>
+
+        <div class="fade-up flex items-center gap-2 justify-center lg:justify-start">
+          <span class="dot active" data-dot></span>
+          <span class="dot" data-dot></span>
+          <span class="dot" data-dot></span>
+        </div>
+      </div>
+
+      <!-- Right image -->
+      <div class="relative order-1 lg:order-2 flex items-center justify-center lg:justify-end">
+        <div class="relative w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[480px] lg:h-[480px]">
+
+          <!-- soft blob backdrop -->
+          <div class="hero-blob absolute -inset-10 rounded-full"></div>
+
+          <!-- rotating dashed ring -->
+          <div class="hero-ring-outer absolute -inset-3 rounded-full border-2 border-dashed border-gold/35"></div>
+          <div class="hero-ring-inner absolute -inset-7 rounded-full border border-gold/20"></div>
+
+          <!-- floating badge -->
+          <div class="hero-float absolute -top-2 -left-2 sm:-top-4 sm:-left-6 z-20 bg-white shadow-gold-glow rounded-2xl px-4 py-3 flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-gold/15 flex items-center justify-center text-gold-deep">
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <div class="leading-tight">
+              <p class="font-serif font-bold text-sm text-charcoal">4.9 Rating</p>
+              <p class="text-[10px] text-muted">2,300+ Reviews</p>
+            </div>
+          </div>
+
+          <!-- main circular image -->
+          <div class="hero-float relative w-full h-full rounded-full overflow-hidden shadow-gold-glow ring-[6px] ring-white">
+            <img
+              src="https://images.unsplash.com/photo-1432139509613-5c4255815697?q=80&w=900&auto=format&fit=crop"
+              alt="Premium grilled chicken dish garnished with edible flowers and seasonal vegetables"
+              class="w-full h-full object-cover">
+          </div>
+
+          <!-- floating price/offer chip -->
+          <div class="hero-float absolute -bottom-3 -right-2 sm:-bottom-5 sm:-right-4 z-20 bg-charcoal text-cream shadow-gold-glow rounded-2xl px-4 py-3" style="animation-delay: 1.2s;">
+            <p class="text-[10px] text-cream/60 tracking-wide">Chef's Special</p>
+            <p class="font-serif font-bold text-sm text-gold">Today's Pick</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU CATEGORIES ============ -->
+<section id="menu" class="py-20 sm:py-24 bg-cream">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+    <div class="text-center mb-14 fade-up">
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal mb-4 tracking-wide">OUR MENU CATEGORIES</h2>
+      <div class="divider-ornament justify-center">
+        <span class="line"></span>
+        <i class="fa-solid fa-star text-gold text-xs"></i>
+        <span class="line right"></span>
+      </div>
+    </div>
+
+    <div class="flex lg:grid lg:grid-cols-6 gap-6 sm:gap-8 overflow-x-auto no-scrollbar px-1 lg:px-0 pb-2">
+
+      <a href="#" class="category-item flex-shrink-0 w-[110px] lg:w-auto flex flex-col items-center gap-4 fade-up group">
+        <div class="category-circle w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-4 ring-paper shadow-card">
+          <img src="https://images.unsplash.com/photo-1576402187878-1a8a1ce9c2e0?q=80&w=400&auto=format&fit=crop" alt="Starters" class="w-full h-full object-cover">
+        </div>
+        <span class="font-serif font-semibold text-charcoal text-sm sm:text-base group-hover:text-gold-deep transition-colors">Starters</span>
+      </a>
+
+      <a href="#" class="category-item flex-shrink-0 w-[110px] lg:w-auto flex flex-col items-center gap-4 fade-up group">
+        <div class="category-circle w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-4 ring-paper shadow-card">
+          <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=400&auto=format&fit=crop" alt="Main Course" class="w-full h-full object-cover">
+        </div>
+        <span class="font-serif font-semibold text-charcoal text-sm sm:text-base group-hover:text-gold-deep transition-colors">Main Course</span>
+      </a>
+
+      <a href="#" class="category-item flex-shrink-0 w-[110px] lg:w-auto flex flex-col items-center gap-4 fade-up group">
+        <div class="category-circle w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-4 ring-paper shadow-card">
+          <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=400&auto=format&fit=crop" alt="Desserts" class="w-full h-full object-cover">
+        </div>
+        <span class="font-serif font-semibold text-charcoal text-sm sm:text-base group-hover:text-gold-deep transition-colors">Desserts</span>
+      </a>
+
+      <a href="#" class="category-item flex-shrink-0 w-[110px] lg:w-auto flex flex-col items-center gap-4 fade-up group">
+        <div class="category-circle w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-4 ring-paper shadow-card bg-charcoal">
+          <img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?q=80&w=400&auto=format&fit=crop" alt="Beverages" class="w-full h-full object-cover opacity-90">
+        </div>
+        <span class="font-serif font-semibold text-charcoal text-sm sm:text-base group-hover:text-gold-deep transition-colors">Beverages</span>
+      </a>
+
+      <a href="#" class="category-item flex-shrink-0 w-[110px] lg:w-auto flex flex-col items-center gap-4 fade-up group">
+        <div class="category-circle w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-4 ring-paper shadow-card bg-charcoal">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=400&auto=format&fit=crop" alt="Pizza" class="w-full h-full object-cover opacity-90">
+        </div>
+        <span class="font-serif font-semibold text-charcoal text-sm sm:text-base group-hover:text-gold-deep transition-colors">Pizza</span>
+      </a>
+
+      <a href="#" class="category-item flex-shrink-0 w-[110px] lg:w-auto flex flex-col items-center gap-4 fade-up group">
+        <div class="category-circle w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-4 ring-paper shadow-card">
+          <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=400&auto=format&fit=crop" alt="Chef Specials" class="w-full h-full object-cover">
+        </div>
+        <span class="font-serif font-semibold text-charcoal text-sm sm:text-base text-center group-hover:text-gold-deep transition-colors">Chef Specials</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHEF'S RECOMMENDATIONS ============ -->
+<section class="py-20 sm:py-24 bg-paper">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+    <div class="text-center mb-10 fade-up">
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal mb-4 tracking-wide">CHEF'S RECOMMENDATIONS</h2>
+      <div class="divider-ornament justify-center mb-9">
+        <span class="line"></span>
+        <i class="fa-solid fa-star text-gold text-xs"></i>
+        <span class="line right"></span>
+      </div>
+
+      <div class="flex items-center justify-center gap-6 sm:gap-9 flex-wrap text-[13px] sm:text-sm font-semibold tracking-wide text-muted">
+        <button class="tab-btn active" data-filter="all">All Items</button>
+        <button class="tab-btn hover:text-charcoal" data-filter="starters">Starters</button>
+        <button class="tab-btn hover:text-charcoal" data-filter="main">Main Course</button>
+        <button class="tab-btn hover:text-charcoal" data-filter="desserts">Desserts</button>
+        <button class="tab-btn hover:text-charcoal" data-filter="beverages">Beverages</button>
+      </div>
+    </div>
+
+    <div id="foodGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+
+      <!-- 1 Chicken Biryani -->
+      <div class="food-item fade-up" data-cat="main">
+        <div class="food-card bg-white rounded-2xl overflow-hidden shadow-card h-full flex flex-col">
+          <div class="relative overflow-hidden h-52">
+            <span class="absolute top-3 left-3 z-10 bg-gold text-charcoal text-[10px] font-bold tracking-wide px-3 py-1.5 rounded-full">Bestseller</span>
+            <img src="https://images.unsplash.com/photo-1559528896-c5310744cce8?q=80&w=600&auto=format&fit=crop" alt="Chicken Biryani" class="food-img w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-lg text-charcoal mb-1">Chicken Biryani</h3>
+            <p class="text-muted text-[13px] mb-3">Fragrant basmati rice with tender chicken</p>
+            <div class="flex items-center gap-1 mb-4 text-[12px]">
+              <i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star-half-stroke star-filled"></i>
+              <span class="text-muted ml-1">(4.8)</span>
+            </div>
+            <div class="mt-auto flex items-center justify-between">
+              <span class="font-serif font-bold text-xl text-gold-deep">Rs. 650</span>
+              <button aria-label="Add Chicken Biryani to cart" data-add-dish="Chicken Biryani" class="w-10 h-10 rounded-full bg-charcoal text-cream flex items-center justify-center hover:bg-gold-deep transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 Chicken Karahi -->
+      <div class="food-item fade-up" data-cat="main">
+        <div class="food-card bg-white rounded-2xl overflow-hidden shadow-card h-full flex flex-col">
+          <div class="relative overflow-hidden h-52">
+            <span class="absolute top-3 left-3 z-10 bg-charcoal text-cream text-[10px] font-bold tracking-wide px-3 py-1.5 rounded-full">New</span>
+            <img src="https://images.unsplash.com/photo-1708782344490-9026aaa5eec7?q=80&w=600&auto=format&fit=crop" alt="Chicken Karahi" class="food-img w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-lg text-charcoal mb-1">Chicken Karahi</h3>
+            <p class="text-muted text-[13px] mb-3">Cooked in tomato, ginger & green chili</p>
+            <div class="flex items-center gap-1 mb-4 text-[12px]">
+              <i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star-half-stroke star-filled"></i>
+              <span class="text-muted ml-1">(4.7)</span>
+            </div>
+            <div class="mt-auto flex items-center justify-between">
+              <span class="font-serif font-bold text-xl text-gold-deep">Rs. 1,200</span>
+              <button aria-label="Add Chicken Karahi to cart" data-add-dish="Chicken Karahi" class="w-10 h-10 rounded-full bg-charcoal text-cream flex items-center justify-center hover:bg-gold-deep transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Seekh Kebab -->
+      <div class="food-item fade-up" data-cat="main">
+        <div class="food-card bg-white rounded-2xl overflow-hidden shadow-card h-full flex flex-col">
+          <div class="relative overflow-hidden h-52">
+            <img src="https://images.unsplash.com/photo-1626323109697-df55d20f06a8?q=80&w=600&auto=format&fit=crop" alt="Seekh Kebab" class="food-img w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-lg text-charcoal mb-1">Seekh Kebab</h3>
+            <p class="text-muted text-[13px] mb-3">Char-grilled minced beef skewers</p>
+            <div class="flex items-center gap-1 mb-4 text-[12px]">
+              <i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star-half-stroke star-filled"></i>
+              <span class="text-muted ml-1">(4.9)</span>
+            </div>
+            <div class="mt-auto flex items-center justify-between">
+              <span class="font-serif font-bold text-xl text-gold-deep">Rs. 750</span>
+              <button aria-label="Add Seekh Kebab to cart" data-add-dish="Seekh Kebab" class="w-10 h-10 rounded-full bg-charcoal text-cream flex items-center justify-center hover:bg-gold-deep transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Gulab Jamun -->
+      <div class="food-item fade-up" data-cat="desserts">
+        <div class="food-card bg-white rounded-2xl overflow-hidden shadow-card h-full flex flex-col">
+          <div class="relative overflow-hidden h-52">
+            <img src="https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?q=80&w=600&auto=format&fit=crop" alt="Gulab Jamun" class="food-img w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-lg text-charcoal mb-1">Gulab Jamun</h3>
+            <p class="text-muted text-[13px] mb-3">Soaked in rose-flavored sugar syrup</p>
+            <div class="flex items-center gap-1 mb-4 text-[12px]">
+              <i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star-half-stroke star-filled"></i><i class="fa-regular fa-star star-empty"></i>
+              <span class="text-muted ml-1">(4.6)</span>
+            </div>
+            <div class="mt-auto flex items-center justify-between">
+              <span class="font-serif font-bold text-xl text-gold-deep">Rs. 250</span>
+              <button aria-label="Add Gulab Jamun to cart" data-add-dish="Gulab Jamun" class="w-10 h-10 rounded-full bg-charcoal text-cream flex items-center justify-center hover:bg-gold-deep transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 Chicken Tikka -->
+      <div class="food-item fade-up" data-cat="starters">
+        <div class="food-card bg-white rounded-2xl overflow-hidden shadow-card h-full flex flex-col">
+          <div class="relative overflow-hidden h-52">
+            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=600&auto=format&fit=crop" alt="Chicken Tikka" class="food-img w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-lg text-charcoal mb-1">Chicken Tikka</h3>
+            <p class="text-muted text-[13px] mb-3">Smoky charcoal-grilled chicken pieces</p>
+            <div class="flex items-center gap-1 mb-4 text-[12px]">
+              <i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-regular fa-star star-empty"></i>
+              <span class="text-muted ml-1">(4.5)</span>
+            </div>
+            <div class="mt-auto flex items-center justify-between">
+              <span class="font-serif font-bold text-xl text-gold-deep">Rs. 550</span>
+              <button aria-label="Add Chicken Tikka to cart" data-add-dish="Chicken Tikka" class="w-10 h-10 rounded-full bg-charcoal text-cream flex items-center justify-center hover:bg-gold-deep transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 Beef Nihari -->
+      <div class="food-item fade-up" data-cat="main">
+        <div class="food-card bg-white rounded-2xl overflow-hidden shadow-card h-full flex flex-col">
+          <div class="relative overflow-hidden h-52">
+            <img src="https://images.unsplash.com/photo-1445979323117-80453f573b71?q=80&w=600&auto=format&fit=crop" alt="Beef Nihari" class="food-img w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-lg text-charcoal mb-1">Beef Nihari</h3>
+            <p class="text-muted text-[13px] mb-3">Slow-cooked, rich & deeply spiced stew</p>
+            <div class="flex items-center gap-1 mb-4 text-[12px]">
+              <i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-regular fa-star star-empty"></i>
+              <span class="text-muted ml-1">(4.4)</span>
+            </div>
+            <div class="mt-auto flex items-center justify-between">
+              <span class="font-serif font-bold text-xl text-gold-deep">Rs. 850</span>
+              <button aria-label="Add Beef Nihari to cart" data-add-dish="Beef Nihari" class="w-10 h-10 rounded-full bg-charcoal text-cream flex items-center justify-center hover:bg-gold-deep transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 Mango Lassi -->
+      <div class="food-item fade-up" data-cat="beverages">
+        <div class="food-card bg-white rounded-2xl overflow-hidden shadow-card h-full flex flex-col">
+          <div class="relative overflow-hidden h-52">
+            <img src="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?q=80&w=600&auto=format&fit=crop" alt="Mango Lassi" class="food-img w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-lg text-charcoal mb-1">Mango Lassi</h3>
+            <p class="text-muted text-[13px] mb-3">Refreshing yogurt & mango blend</p>
+            <div class="flex items-center gap-1 mb-4 text-[12px]">
+              <i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-regular fa-star star-empty"></i>
+              <span class="text-muted ml-1">(4.3)</span>
+            </div>
+            <div class="mt-auto flex items-center justify-between">
+              <span class="font-serif font-bold text-xl text-gold-deep">Rs. 200</span>
+              <button aria-label="Add Mango Lassi to cart" data-add-dish="Mango Lassi" class="w-10 h-10 rounded-full bg-charcoal text-cream flex items-center justify-center hover:bg-gold-deep transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 Shahi Tukda -->
+      <div class="food-item fade-up" data-cat="desserts">
+        <div class="food-card bg-white rounded-2xl overflow-hidden shadow-card h-full flex flex-col">
+          <div class="relative overflow-hidden h-52">
+            <img src="https://images.unsplash.com/photo-1569954432565-ba73dcd5b9f2?q=80&w=600&auto=format&fit=crop" alt="Shahi Tukda" class="food-img w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-serif font-bold text-lg text-charcoal mb-1">Shahi Tukda</h3>
+            <p class="text-muted text-[13px] mb-3">Fried bread soaked in sweetened milk</p>
+            <div class="flex items-center gap-1 mb-4 text-[12px]">
+              <i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star star-filled"></i><i class="fa-solid fa-star-half-stroke star-filled"></i>
+              <span class="text-muted ml-1">(4.7)</span>
+            </div>
+            <div class="mt-auto flex items-center justify-between">
+              <span class="font-serif font-bold text-xl text-gold-deep">Rs. 300</span>
+              <button aria-label="Add Shahi Tukda to cart" data-add-dish="Shahi Tukda" class="w-10 h-10 rounded-full bg-charcoal text-cream flex items-center justify-center hover:bg-gold-deep transition-colors"><i class="fa-solid fa-plus text-sm"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-12 fade-up">
+      <a href="#" class="btn-outline inline-block px-9 py-3.5 rounded-md font-semibold text-[13px] tracking-[0.12em]">VIEW FULL MENU</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLACE YOUR ORDER ============ -->
+<section id="order" class="py-20 sm:py-24 bg-cream">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10">
+    <div class="text-center mb-12 fade-up">
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal mb-4 tracking-wide">PLACE YOUR ORDER</h2>
+      <div class="divider-ornament justify-center mb-5">
+        <span class="line"></span>
+        <i class="fa-solid fa-star text-gold text-xs"></i>
+        <span class="line right"></span>
+      </div>
+      <p class="text-muted text-sm max-w-md mx-auto">Fill in your details and we'll confirm your order over WhatsApp.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-5 fade-up bg-white rounded-2xl shadow-card overflow-hidden">
+
+      <form id="orderForm" class="lg:col-span-3 p-7 sm:p-10 space-y-5">
+        <div>
+          <label for="custName" class="block text-sm font-semibold text-charcoal mb-2">Full Name</label>
+          <input type="text" id="custName" required class="w-full px-4 py-3 rounded-lg border border-charcoal/15 focus:border-gold focus:ring-1 focus:ring-gold outline-none text-sm" placeholder="Your name">
+        </div>
+
+        <div>
+          <label for="custPhone" class="block text-sm font-semibold text-charcoal mb-2">Phone Number</label>
+          <input type="tel" id="custPhone" required class="w-full px-4 py-3 rounded-lg border border-charcoal/15 focus:border-gold focus:ring-1 focus:ring-gold outline-none text-sm" placeholder="03XX-XXXXXXX">
+        </div>
+
+        <div>
+          <label for="custLocation" class="block text-sm font-semibold text-charcoal mb-2">Delivery Location</label>
+          <input type="text" id="custLocation" required value="Hyderabad" class="w-full px-4 py-3 rounded-lg border border-charcoal/15 focus:border-gold focus:ring-1 focus:ring-gold outline-none text-sm" placeholder="Area, City">
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+          <div class="col-span-2">
+            <label for="custDish" class="block text-sm font-semibold text-charcoal mb-2">Select Dish</label>
+            <select id="custDish" required class="w-full px-4 py-3 rounded-lg border border-charcoal/15 focus:border-gold focus:ring-1 focus:ring-gold outline-none text-sm bg-white">
+              <option value="Chicken Biryani" data-price="650">Chicken Biryani — Rs. 650</option>
+              <option value="Chicken Karahi" data-price="1200">Chicken Karahi — Rs. 1,200</option>
+              <option value="Seekh Kebab" data-price="750">Seekh Kebab — Rs. 750</option>
+              <option value="Chicken Tikka" data-price="550">Chicken Tikka — Rs. 550</option>
+              <option value="Beef Nihari" data-price="850">Beef Nihari — Rs. 850</option>
+              <option value="Gulab Jamun" data-price="250">Gulab Jamun — Rs. 250</option>
+              <option value="Shahi Tukda" data-price="300">Shahi Tukda — Rs. 300</option>
+              <option value="Mango Lassi" data-price="200">Mango Lassi — Rs. 200</option>
+            </select>
+          </div>
+          <div class="col-span-1">
+            <label for="custQty" class="block text-sm font-semibold text-charcoal mb-2">Qty</label>
+            <input type="number" id="custQty" min="1" value="1" class="w-full px-4 py-3 rounded-lg border border-charcoal/15 focus:border-gold focus:ring-1 focus:ring-gold outline-none text-sm">
+          </div>
+        </div>
+
+        <div>
+          <label for="custNote" class="block text-sm font-semibold text-charcoal mb-2">Special Instructions <span class="text-muted font-normal">(optional)</span></label>
+          <textarea id="custNote" rows="3" class="w-full px-4 py-3 rounded-lg border border-charcoal/15 focus:border-gold focus:ring-1 focus:ring-gold outline-none text-sm resize-none" placeholder="Less spicy, extra raita, etc."></textarea>
+        </div>
+
+        <button type="submit" class="btn-gold w-full py-4 rounded-md font-semibold text-[13px] tracking-[0.12em] flex items-center justify-center gap-2">
+          <i class="fa-brands fa-whatsapp text-base"></i> PLACE ORDER VIA WHATSAPP
+        </button>
+      </form>
+
+      <div class="lg:col-span-2 bg-charcoal text-cream p-7 sm:p-10 flex flex-col">
+        <h3 class="font-serif text-xl font-bold mb-6">Order Summary</h3>
+        <div class="space-y-3 text-sm flex-1">
+          <div class="flex justify-between text-cream/70">
+            <span id="summaryDishLabel">Chicken Biryani × 1</span>
+            <span id="summarySubtotal">Rs. 650</span>
+          </div>
+          <div class="flex justify-between text-cream/70">
+            <span>Delivery Charges</span>
+            <span>Rs. 300</span>
+          </div>
+        </div>
+        <div class="border-t border-cream/15 mt-5 pt-5 flex justify-between items-center">
+          <span class="font-serif font-semibold">Total</span>
+          <span id="summaryTotal" class="font-serif font-bold text-2xl text-gold">Rs. 950</span>
+        </div>
+        <div class="mt-8 pt-6 border-t border-cream/15 text-[12px] text-cream/50 space-y-2">
+          <p><i class="fa-solid fa-phone text-gold/70 mr-2"></i>0302-1071813</p>
+          <p><i class="fa-solid fa-envelope text-gold/70 mr-2"></i>hammmadahmed00321@gmail.com</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT (brief, supports nav anchor) ============ -->
+<section id="about" class="py-20 sm:py-24 bg-cream">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="relative fade-up order-2 lg:order-1">
+        <div class="rounded-3xl overflow-hidden shadow-soft aspect-[4/5]">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=900&auto=format&fit=crop" alt="Chef plating a gourmet dish in Flavoria's kitchen" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute -bottom-6 -right-6 bg-gold text-charcoal rounded-2xl px-6 py-5 shadow-gold-glow hidden sm:block">
+          <p class="font-serif text-3xl font-bold leading-none">12+</p>
+          <p class="text-[11px] tracking-wide mt-1">Years of Excellence</p>
+        </div>
+      </div>
+      <div class="fade-up order-1 lg:order-2">
+        <div class="inline-flex items-center gap-2 text-gold-deep font-semibold text-[12px] tracking-[0.2em] mb-5">
+          <span class="w-6 h-px bg-gold-deep"></span> OUR STORY
+        </div>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal mb-6 leading-tight">Where Every Plate Tells a Story</h2>
+        <p class="text-muted leading-relaxed mb-6">
+          Flavoria began as a single family table and grew into a destination for those who believe dinner should feel like an occasion. Our chefs source what's in season, plate with restraint, and let the ingredients lead.
+        </p>
+        <div class="grid grid-cols-2 gap-6">
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-leaf text-gold-deep text-lg mt-0.5"></i>
+            <div>
+              <p class="font-serif font-semibold text-charcoal">Seasonal Sourcing</p>
+              <p class="text-muted text-[13px]">Local farms, daily</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-hat-chef text-gold-deep text-lg mt-0.5"></i>
+            <div>
+              <p class="font-serif font-semibold text-charcoal">Award-Winning</p>
+              <p class="text-muted text-[13px]">3 culinary honors</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPECIAL OFFER BANNER ============ -->
+<section id="reservation" class="offer-banner relative py-24 sm:py-32">
+  <div class="absolute inset-0 bg-gradient-to-r from-charcoal/40 via-transparent to-charcoal/40"></div>
+  <div class="max-w-3xl mx-auto px-6 text-center relative z-10 fade-up">
+    <p class="text-gold font-semibold text-[12px] tracking-[0.3em] mb-5">SPECIAL OFFER</p>
+    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-cream mb-8 leading-tight">
+      Get 20% Off On<br class="sm:hidden"> Your First Order
+    </h2>
+    <a href="#order" class="btn-gold inline-block px-10 py-4 rounded-md font-semibold text-[13px] tracking-[0.15em]">ORDER NOW</a>
+  </div>
+</section>
+
+<!-- ============ FEATURES FOOTER BAR ============ -->
+<section class="bg-charcoal py-14">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-6">
+
+      <div class="flex flex-col items-center text-center gap-3 fade-up">
+        <div class="w-14 h-14 rounded-full border border-gold/40 flex items-center justify-center text-gold text-xl">
+          <i class="fa-solid fa-wheat-awn"></i>
+        </div>
+        <p class="font-serif font-semibold text-cream text-sm sm:text-base">Fresh Ingredients</p>
+        <p class="text-cream/50 text-[11px] sm:text-xs">Farm to table</p>
+      </div>
+
+      <div class="flex flex-col items-center text-center gap-3 fade-up">
+        <div class="w-14 h-14 rounded-full border border-gold/40 flex items-center justify-center text-gold text-xl">
+          <i class="fa-solid fa-kitchen-set"></i>
+        </div>
+        <p class="font-serif font-semibold text-cream text-sm sm:text-base">Expert Chefs</p>
+        <p class="text-cream/50 text-[11px] sm:text-xs">Passionate & experienced</p>
+      </div>
+
+      <div class="flex flex-col items-center text-center gap-3 fade-up">
+        <div class="w-14 h-14 rounded-full border border-gold/40 flex items-center justify-center text-gold text-xl">
+          <i class="fa-solid fa-house-chimney"></i>
+        </div>
+        <p class="font-serif font-semibold text-cream text-sm sm:text-base">Cozy Ambiance</p>
+        <p class="text-cream/50 text-[11px] sm:text-xs">Perfect for everyone</p>
+      </div>
+
+      <div class="flex flex-col items-center text-center gap-3 fade-up">
+        <div class="w-14 h-14 rounded-full border border-gold/40 flex items-center justify-center text-gold text-xl">
+          <i class="fa-solid fa-truck-fast"></i>
+        </div>
+        <p class="font-serif font-semibold text-cream text-sm sm:text-base">Fast Delivery</p>
+        <p class="text-cream/50 text-[11px] sm:text-xs">On time, every time</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-ink text-cream/70 py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex flex-col items-center sm:items-start">
+        <div class="flex items-center gap-2 mb-1">
+          <i class="fa-solid fa-crown text-gold text-sm"></i>
+          <span class="font-serif text-lg font-bold tracking-[0.1em] text-cream">FLAVORIA</span>
+        </div>
+        <p class="text-[11px] text-cream/40 tracking-[0.2em]">FINE DINING</p>
+      </div>
+      <p class="text-[13px] text-cream/40 text-center">© 2026 Flavoria Fine Dining. All rights reserved.</p>
+      <div class="flex items-center gap-4 text-cream/60">
+        <a href="#" aria-label="Facebook" class="hover:text-gold transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram" class="hover:text-gold transition-colors"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Twitter" class="hover:text-gold transition-colors"><i class="fa-brands fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuIcon = document.getElementById('menuIcon');
+
+  menuToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', isOpen);
+    menuIcon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+  });
+
+  // Close mobile menu when a link is clicked
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', false);
+      menuIcon.className = 'fa-solid fa-bars';
+    });
+  });
+
+  // Recommendation tabs filter
+  const tabs = document.querySelectorAll('.tab-btn');
+  const items = document.querySelectorAll('.food-item');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+
+      items.forEach(item => {
+        if (filter === 'all' || item.dataset.cat === filter) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Hero carousel dots (decorative auto-cycle)
+  const dots = document.querySelectorAll('[data-dot]');
+  let dotIndex = 0;
+  setInterval(() => {
+    dots.forEach(d => d.classList.remove('active'));
+    dotIndex = (dotIndex + 1) % dots.length;
+    dots[dotIndex].classList.add('active');
+  }, 3500);
+
+  // ===== Order form: live summary, add-to-cart wiring, WhatsApp submission =====
+  const RESTAURANT_WHATSAPP = '923021071813';
+  const DELIVERY_CHARGE = 300;
+
+  const orderForm = document.getElementById('orderForm');
+  const dishSelect = document.getElementById('custDish');
+  const qtyInput = document.getElementById('custQty');
+  const summaryDishLabel = document.getElementById('summaryDishLabel');
+  const summarySubtotal = document.getElementById('summarySubtotal');
+  const summaryTotal = document.getElementById('summaryTotal');
+
+  function updateOrderSummary() {
+    const selectedOption = dishSelect.options[dishSelect.selectedIndex];
+    const price = parseInt(selectedOption.dataset.price, 10);
+    const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+    const subtotal = price * qty;
+    const total = subtotal + DELIVERY_CHARGE;
+
+    summaryDishLabel.textContent = `${selectedOption.value} × ${qty}`;
+    summarySubtotal.textContent = `Rs. ${subtotal.toLocaleString()}`;
+    summaryTotal.textContent = `Rs. ${total.toLocaleString()}`;
+  }
+
+  dishSelect.addEventListener('change', updateOrderSummary);
+  qtyInput.addEventListener('input', updateOrderSummary);
+  updateOrderSummary();
+
+  // "+" buttons on food cards pre-select that dish and jump to the order form
+  document.querySelectorAll('[data-add-dish]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const dishName = btn.dataset.addDish;
+      const matchingOption = Array.from(dishSelect.options).find(o => o.value === dishName);
+      if (matchingOption) {
+        dishSelect.value = dishName;
+        updateOrderSummary();
+      }
+      document.getElementById('order').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => document.getElementById('custName').focus(), 600);
+    });
+  });
+
+  orderForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('custName').value.trim();
+    const phone = document.getElementById('custPhone').value.trim();
+    const location = document.getElementById('custLocation').value.trim();
+    const dish = dishSelect.value;
+    const qty = qtyInput.value;
+    const note = document.getElementById('custNote').value.trim();
+    const total = summaryTotal.textContent;
+
+    let message = `New Order - Flavoria Fine Dining\n\n`;
+    message += `Name: ${name}\n`;
+    message += `Phone: ${phone}\n`;
+    message += `Delivery Location: ${location}\n`;
+    message += `Dish: ${dish} x ${qty}\n`;
+    if (note) message += `Note: ${note}\n`;
+    message += `Total (incl. Rs. ${DELIVERY_CHARGE} delivery): ${total}`;
+
+    window.open(`https://wa.me/${RESTAURANT_WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
+  });
+
+  // Fade-up on scroll using IntersectionObserver
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
